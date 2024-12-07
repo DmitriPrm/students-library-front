@@ -22,6 +22,7 @@ import {appRoutes} from "@/shared/lib/navigation/routes.ts";
   min-height: 100dvh;
   display: grid;
   grid-template-rows: 80px 1fr;
+  background-color: #f8f9fa;
 }
 .app {
   margin-bottom: 2rem;
@@ -29,6 +30,7 @@ import {appRoutes} from "@/shared/lib/navigation/routes.ts";
 .header {
   width: 100%;
   border-bottom: 1px solid #bdbdbd;
+  background-color: white;
   &__wrap {
     display: flex;
     gap: 2rem;

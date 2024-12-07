@@ -71,11 +71,12 @@ getUserData();
 <style lang="scss" scoped>
 .page-layout {
   max-width: 1200px;
-  margin: 5rem auto 0;
+  margin: 1rem auto 0;
 }
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   &__title {
     text-align: center;
   }
