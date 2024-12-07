@@ -41,7 +41,7 @@
 
     <el-form-item prop="tenure">
       <label for="tenure">Срок</label>
-      <el-input v-model="formValues.tenure" id="tenure" class="field" />
+      <el-input v-model="formValues.tenure" id="tenure" class="field" type="number" min="1" />
     </el-form-item>
 
     <el-button native-type="submit" class="field">
@@ -78,7 +78,7 @@ const rules = reactive<FormRules<IBookLoanForm>>({
 const formValues = reactive<IBookLoanForm>({
   books_id: null,
   readers_id_stud: null,
-  tenure: null,
+  tenure: 1,
 })
 
 

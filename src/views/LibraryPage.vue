@@ -19,7 +19,7 @@
             + Добавить книгу
           </el-button>
         </div>
-        <el-table :data="studentsData">
+        <el-table empty-text="Нет данных" :data="studentsData">
           <el-table-column prop="id" label="ID" />
           <el-table-column prop="author" label="Автор" />
           <el-table-column prop="name_book" label="Название книги" />

@@ -19,7 +19,12 @@
             + Добавить выдачу книги
           </el-button>
         </div>
-        <el-table :data="studentsData" :row-class-name="tableRowClassName" class="books-table">
+        <el-table
+            class="books-table"
+            empty-text="Нет данных"
+            :data="studentsData"
+            :row-class-name="tableRowClassName"
+        >
           <el-table-column prop="books_id" label="Книга" />
           <el-table-column prop="readers_id_stud" label="Читатель" />
           <el-table-column prop="date_loan" label="Дата взятия" />

@@ -14,7 +14,7 @@
             + Добавить студента
           </el-button>
         </div>
-        <el-table :data="studentsData">
+        <el-table empty-text="Нет данных" :data="studentsData">
           <el-table-column prop="id" label="ID" />
           <el-table-column prop="surname" label="Фамилия" />
           <el-table-column prop="name" label="Имя" />
