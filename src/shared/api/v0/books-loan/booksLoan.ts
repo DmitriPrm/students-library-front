@@ -9,3 +9,7 @@ export function getAll() {
 export function save(dto: any) {
     return apiInstance.post(BASE_URL, dto);
 }
+
+export function addTenure() {
+    return apiInstance.post(`${BASE_URL}/add-tenure`);
+}

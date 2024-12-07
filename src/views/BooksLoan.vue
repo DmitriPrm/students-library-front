@@ -12,11 +12,14 @@
     <div v-else class="page-wrap">
       <el-card>
         <div class="page-wrap__create-btn-wrap">
+          <el-button class="page-wrap__create-btn" @click="handleAddTenure">
+            Уменьшить срок на 1 день
+          </el-button>
           <el-button class="page-wrap__create-btn" @click="handleAddBook">
             + Добавить выдачу книги
           </el-button>
         </div>
-        <el-table :data="studentsData">
+        <el-table :data="studentsData" :row-class-name="tableRowClassName" class="books-table">
           <el-table-column prop="books_id" label="Книга" />
           <el-table-column prop="readers_id_stud" label="Читатель" />
           <el-table-column prop="date_loan" label="Дата взятия" />
@@ -38,9 +41,25 @@ import {appRoutes} from "@/shared/lib/navigation/routes.ts";
 import {api} from "@/shared/api";
 import CreateBookForm from "@/components/ui/CreateBookForm.vue";
 import CreateBookLoanForm from "@/components/ui/CreateBookLoanForm.vue";
+import {handleBackendError} from "@/shared/lib/helpers/handleBackendError.ts";
 const studentsData = ref();
 const loading = ref(true);
 const isCreateModalOpen = ref(false);
+
+const tableRowClassName = ({
+   row,
+   rowIndex,
+ }: {
+  row: any,
+  rowIndex: number
+}) => {
+  if (row?.current_tenure < 0) {
+    return 'danger-row';
+  } else if (row?.current_tenure < 4) {
+    return 'warning-row';
+  }
+  return ''
+}
 
 async function getUserData() {
   try {
@@ -61,6 +80,18 @@ function handleAddBook() {
 function handleSave() {
   isCreateModalOpen.value = false;
   getUserData();
+}
+
+async function handleAddTenure() {
+  try {
+    loading.value = true;
+    const res = await api.booksLoan.addTenure();
+    studentsData.value = res.data.data;
+  } catch(e) {
+    console.error(e);
+  } finally {
+    loading.value = false;
+  }
 }
 
 getUserData();
@@ -84,6 +115,15 @@ getUserData();
   &__create-btn-wrap {
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+.books-table {
+  :deep(.warning-row) {
+    --el-table-tr-bg-color: var(--el-color-warning-light-7);
+  }
+  :deep(.danger-row) {
+    --el-table-tr-bg-color: var(--el-color-danger-light-7);
   }
 }
 </style>

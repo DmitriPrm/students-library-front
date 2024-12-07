@@ -24,7 +24,7 @@ import {appRoutes} from "@/shared/lib/navigation/routes.ts";
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100dvh;
+  height: 100%;
   &__card {
     max-width: 500px;
   }

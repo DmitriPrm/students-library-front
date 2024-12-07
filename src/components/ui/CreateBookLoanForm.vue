@@ -31,6 +31,7 @@ import { ref, reactive, computed } from "vue";
 import type { FormRules } from "element-plus";
 import {api} from "@/shared/api";
 import {dayjs} from "element-plus";
+import {handleBackendError} from "@/shared/lib/helpers/handleBackendError.ts";
 const loading = ref(false);
 const emit = defineEmits(["save"]);
 
@@ -67,6 +68,7 @@ async function handleSave() {
     await api.booksLoan.save(dto);
     emit("save");
   } catch (e) {
+    handleBackendError(e);
     console.error(e);
   }
   finally {
