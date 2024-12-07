@@ -8,6 +8,7 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     CreateBookForm: typeof import('./src/components/ui/CreateBookForm.vue')['default']
+    CreateBookLoanForm: typeof import('./src/components/ui/CreateBookLoanForm.vue')['default']
     CreateStudentForm: typeof import('./src/components/ui/CreateStudentForm.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
     ElCard: typeof import('element-plus/es')['ElCard']
