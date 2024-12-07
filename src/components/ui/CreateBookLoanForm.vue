@@ -7,12 +7,36 @@
   >
     <el-form-item prop="author">
       <label for="books_id">Книга</label>
-      <el-input v-model="formValues.books_id" id="books_id" class="field"/>
+      <el-select
+          v-model="formValues.books_id"
+          id="books_id"
+          class="field"
+          placeholder="Выберите книгу"
+      >
+        <el-option
+            v-for="book in booksValues"
+            :key="book.id"
+            :value="book.id"
+            :label="book.value"
+        />
+      </el-select>
     </el-form-item>
 
     <el-form-item prop="readers_id_stud">
       <label for="readers_id_stud">Студент-читатель</label>
-      <el-input v-model="formValues.readers_id_stud" id="readers_id_stud" class="field" />
+      <el-select
+          v-model="formValues.readers_id_stud"
+          id="readers_id_stud"
+          class="field"
+          placeholder="Выберите студента"
+      >
+        <el-option
+          v-for="student in studentsValues"
+          :key="student.id"
+          :value="student.id"
+          :label="student.value"
+        />
+      </el-select>
     </el-form-item>
 
     <el-form-item prop="tenure">
@@ -35,8 +59,8 @@ import {handleBackendError} from "@/shared/lib/helpers/handleBackendError.ts";
 const loading = ref(false);
 const emit = defineEmits(["save"]);
 
-const currentYear = computed(() => dayjs().get("year"));
-
+const studentsValues = ref();
+const booksValues = ref();
 interface IBookLoanForm {
   books_id: number;
   readers_id_stud: number;
@@ -76,4 +100,19 @@ async function handleSave() {
   }
 }
 
+async function getFormValues() {
+  try {
+    loading.value = true;
+    const res = await api.booksLoan.getCreateForm();
+
+    studentsValues.value = res.data?.readers_id_stud;
+    booksValues.value = res.data?.books_id;
+  } catch (e) {
+    handleBackendError(e)
+  } finally {
+    loading.value = false;
+  }
+}
+
+getFormValues();
 </script>

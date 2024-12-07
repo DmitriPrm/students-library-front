@@ -13,3 +13,7 @@ export function save(dto: any) {
 export function addTenure() {
     return apiInstance.post(`${BASE_URL}/add-tenure`);
 }
+
+export function getCreateForm() {
+    return apiInstance.get(`${BASE_URL}/create`);
+}
